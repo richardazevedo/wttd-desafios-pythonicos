@@ -14,12 +14,12 @@ antes de combina-las.
 def front_x(words):
     # +++ SUA SOLUÇÃO +++
 
-    words.sort(key=func_x)
+    words.sort(key=lambda x: x if x[0] != 'x' else x.replace('x', ' '))
     return words
 
 
-def func_x(x):
-    return x if x[0] != 'x' else x.replace('x', ' ')
+# def func_x(x):
+#     return x if x[0] != 'x' else x.replace('x', ' ')
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
 
