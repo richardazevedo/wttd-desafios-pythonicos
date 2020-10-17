@@ -57,20 +57,35 @@ import sys
 # +++ SUA SOLUÇÃO +++
 # Defina as funções print_words(filename) e print_top(filename).
 
+def words(lista):
+    d = {}
+    for i in lista:
+        d[i] = d.get(i, 0) + 1
+    return d
 
 # A função abaixo chama print_words() ou print_top() de acordo com os
 # parêtros do programa.
+
+def top(d):
+    return sorted(d.items(), key=lambda x: x[1], reverse=True)
+
+
 def main():
     if len(sys.argv) != 3:
         print('Utilização: ./13_wordcount.py {--count | --topcount} file')
         sys.exit(1)
 
     option = sys.argv[1]
-    filename = sys.argv[2]
+    # filename = sys.argv[2]
+    with open(sys.argv[2], 'r') as arq:
+        lista = ((arq.read()).lower()).split()
+
+    d = words(lista)
+
     if option == '--count':
-        print_words(filename)
+        print(d)
     elif option == '--topcount':
-        print_top(filename)
+        print(top(d)[:21])
     else:
         print('unknown option: ' + option)
         sys.exit(1)
