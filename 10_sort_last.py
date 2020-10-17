@@ -12,6 +12,7 @@ Dica: Use uma custom key= function para extrair o ultimo elemento de cada tupla.
 def sort_last(tuples):
     # +++ SUA SOLUÇÃO +++
     tuples.sort(key=lambda t: t[-1])
+
     return tuples
 
 
