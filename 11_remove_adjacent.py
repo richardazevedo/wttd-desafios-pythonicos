@@ -9,9 +9,24 @@ Irá retornar: [1, 2, 3]
 """
 
 def remove_adjacent(nums):
-    # +++ SUA SOLUÇÃO +++
-    return
 
+
+    #    [2, 2, 3, 3, 3, 2, 2]
+    # [2, 2, 3, 3, 3, 2, 2]
+    #
+    # +++ SUA SOLUÇÃO +++
+    # if nums:
+    #     no_adjas = []
+    #     previous = nums[0]
+    #     no_adjas.append(nums[0])
+    #     for n in nums:
+    #         if n != previous:
+    #             no_adjas.append(n)
+    #             previous = n
+    #     return no_adjas
+    # else:
+    #     return []
+    return [x for x, y in zip(nums[:-1], nums[1:]) if x != y ] + [nums[-1]] if nums else []
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
 
