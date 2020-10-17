@@ -43,28 +43,63 @@ import random
 import sys
 
 
-def mimic_dict(filename):
-  """Retorna o dicionario imitador mapeando cada palavra para a lista de
-  palavras subsequentes."""
-    # +++ SUA SOLUÇÃO +++
-  return
+def build_dictionary(dictionary, word, next_word):
+    if dictionary.get(word):
+        string = dictionary.get(word)
+        string.append(next_word)
+        dictionary[word] = string
+    else:
+        dictionary[word] = [next_word]
+
+    return dictionary
 
 
-def print_mimic(mimic_dict, word):
-  """Dado o dicionario imitador e a palavra inicial, imprime texto de 200 palavras."""
-    # +++ SUA SOLUÇÃO +++
-  return
+def get_words(dictionary, word, composition=['']):
+    if word != '.':
+        next_words = dictionary.get(word)
+        next_word = random.choice(next_words)
+        composition.append(next_word)
+
+    return composition
 
 
-# Chama mimic_dict() e print_mimic()
+def mimic_composition(filename):
+    with open(filename, 'r') as file:
+        words = file.read().lower().split()
+
+    dictionary = {'': [words[0]]}
+
+    for i in range(len(words) - 1):
+        word = words[i]
+        next_word = words[i + 1]
+        build_dictionary(dictionary, word, next_word)
+
+    last_key = list(dictionary.keys())[-1]
+    last_value = dictionary[last_key]
+    last_str = str(last_value[0])
+    dictionary[last_str] = ['.']
+
+    return dictionary
+
+
+def print_mimic(dictionary):
+    composition = get_words(dictionary, '')
+
+    while composition[-1] != '.':
+        get_words(dictionary, composition[-1], composition)
+
+    fake_song = ' '.join(composition)
+    print(fake_song)
+
+
 def main():
-  if len(sys.argv) != 2:
-    print('Utilização: ./14_mimic.py file-to-read')
-    sys.exit(1)
+    if len(sys.argv) != 2:
+        print('Utilização: ./14_mimic.py file-to-read')
+        sys.exit(1)
 
-  dict = mimic_dict(sys.argv[1])
-  print_mimic(dict, '')
+    dictionary = mimic_composition(sys.argv[1])
+    print_mimic(dictionary)
 
 
 if __name__ == '__main__':
-  main()
+    main()
