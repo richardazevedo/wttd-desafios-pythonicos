@@ -11,7 +11,17 @@ A sua solução deve rodar em tempo linear, ou seja, deve fazer uma
 
 def linear_merge(list1, list2):
     # +++ SUA SOLUÇÃO +++
-    return
+    l1 = l2 = 0
+    ret = []
+    while l1 < len(list1) and l2 < len(list2):
+        if list1[l1] < list2[l2]:
+            ret.append(list1[l1])
+            l1 += 1
+        else:
+            ret.append(list2[l2])
+            l2 += 1
+    ret += list1[l1:] + list2[l2:]
+    return ret
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
