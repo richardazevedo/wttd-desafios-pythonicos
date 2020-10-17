@@ -81,7 +81,6 @@ def mimic_composition(filename):
 
     return dictionary
 
-
 def print_mimic(dictionary):
     composition = get_words(dictionary, '')
 
